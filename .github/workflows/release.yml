@@ -1,0 +1,41 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*.*.*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check version
+        shell: powershell
+        run: |
+          $tag = '${{ github.ref_name }}'.TrimStart('v')
+          $v = [regex]::Match((Get-Content common.ps1 -Raw), "FocusVersion = '([^']+)'").Groups[1].Value
+          if ($v -ne $tag) { Write-Error "Tag v$tag does not match `$FocusVersion $v in common.ps1"; exit 1 }
+
+      - name: Build zip and release notes
+        shell: powershell
+        run: |
+          $tag = '${{ github.ref_name }}'
+          git archive --format=zip --prefix="distraction-log/" -o "distraction-log-$tag.zip" HEAD
+          $log = Get-Content CHANGELOG.md -Raw
+          $v = $tag.TrimStart('v')
+          $m = [regex]::Match($log, "(?ms)^## \[$([regex]::Escape($v))\][^\n]*\n(.*?)(?=^## \[|^\[)")
+          $notes = $m.Groups[1].Value.Trim()
+          $notes += "`n`n**Install:** unzip to a folder that stays put (for example ``C:\Users\<you>\FocusLog``) and run ``powershell -ExecutionPolicy Bypass -File setup.ps1``."
+          [IO.File]::WriteAllText("$pwd\notes.md", $notes)
+
+      - name: Publish release
+        shell: powershell
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $tag = '${{ github.ref_name }}'
+          gh release create $tag "distraction-log-$tag.zip" --title "Distraction Log $($tag.TrimStart('v'))" --notes-file notes.md

@@ -1,0 +1,21 @@
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{ps1,vbs}]
+charset = latin1   # keep scripts ASCII-only (Windows PowerShell 5.1)
+end_of_line = crlf
+
+[*.{json,md}]
+charset = utf-8
+
+[*.{yml,yaml}]
+indent_size = 2
+end_of_line = lf
+
+[*.md]
+trim_trailing_whitespace = false

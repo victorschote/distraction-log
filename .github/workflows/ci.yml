@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Tests (Windows PowerShell 5.1)
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Pester and PSScriptAnalyzer
+        shell: powershell
+        run: |
+          Install-Module Pester -RequiredVersion 5.7.1 -Force -SkipPublisherCheck -Scope CurrentUser
+          Install-Module PSScriptAnalyzer -Force -Scope CurrentUser
+
+      - name: Run tests
+        shell: powershell
+        run: |
+          Import-Module Pester -RequiredVersion 5.7.1
+          $c = New-PesterConfiguration
+          $c.Run.Path = 'tests'
+          $c.Run.Exit = $true
+          $c.Output.Verbosity = 'Detailed'
+          $c.TestResult.Enabled = $true
+          $c.TestResult.OutputPath = 'test-results.xml'
+          Invoke-Pester -Configuration $c
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: test-results.xml
+
+  screens:
+    name: Screen self-test
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Render every screen (English and Portuguese)
+        shell: powershell
+        run: |
+          New-Item -ItemType Directory -Force logs, shots\en, shots\pt | Out-Null
+          foreach ($lang in 'en', 'pt') {
+            "{`"Language`":`"$lang`"}" | Set-Content settings.json
+            $env:FL_SNAPSHOT = (Resolve-Path "shots\$lang").Path
+            $p = Start-Process powershell -ArgumentList '-NoProfile -STA -ExecutionPolicy Bypass -File app.ps1' -Wait -PassThru -NoNewWindow
+            if (Test-Path app-error.txt) { Get-Content app-error.txt; exit 1 }
+            $n = @(Get-ChildItem "shots\$lang" -Filter *.png).Count
+            "$lang : $n screens"
+            if ($n -lt 10) { Write-Error "Expected at least 10 screens in $lang, got $n"; exit 1 }
+          }
+
+      - name: Upload screens
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screens
+          path: shots

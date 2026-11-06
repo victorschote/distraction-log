@@ -1,5 +1,11 @@
 # Distraction Log
 
+[![CI](https://github.com/victor-schote/distraction-log/actions/workflows/ci.yml/badge.svg)](https://github.com/victor-schote/distraction-log/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/victor-schote/distraction-log)](https://github.com/victor-schote/distraction-log/releases/latest)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+![Windows 10/11](https://img.shields.io/badge/Windows-10%20%7C%2011-0078D6)
+![PowerShell 5.1](https://img.shields.io/badge/PowerShell-5.1-5391FE)
+
 A small Windows app that shows where your working time goes and helps you stay focused.
 It notices which app or website is in front, keeps the record **only on your computer**,
 and turns it into dashboards, alerts, a focus timer, daily and weekly plans, and a weekly review.
@@ -25,6 +31,8 @@ and turns it into dashboards, alerts, a focus timer, daily and weekly plans, and
 - [Customizing](#customizing)
 - [Troubleshooting](#troubleshooting)
 - [Uninstall](#uninstall)
+- [Development](#development)
+- [License](#license)
 
 ## Features
 
@@ -55,7 +63,8 @@ and turns it into dashboards, alerts, a focus timer, daily and weekly plans, and
 
 ## Install
 
-1. Download this folder (or `git clone` it) to a place that stays put, for example
+1. Download the zip from the [latest release](https://github.com/victor-schote/distraction-log/releases/latest)
+   (or `git clone` the repository) and put it in a folder that stays put, for example
    `C:\Users\<you>\FocusLog`.
 2. Open PowerShell in that folder and run:
 
@@ -253,3 +262,17 @@ powershell -ExecutionPolicy Bypass -File setup.ps1 -Uninstall
 
 This removes the task, shortcuts and link, and keeps your data. If you set up the site blocker,
 also run `install-blocker.ps1 -Uninstall` as admin. Then delete the folder if you no longer want the data.
+
+## Development
+
+- Tests: `Invoke-Pester .\tests` (Pester 5). They run on a temporary copy, never on your data.
+- Every push and pull request runs the tests and renders every screen in English and Portuguese
+  on GitHub Actions ([CI](.github/workflows/ci.yml)); the screens are attached to each run.
+- Pushing a tag like `v1.1.0` publishes a release with a zip ([release workflow](.github/workflows/release.yml)).
+- How to contribute, the coding rules and the release steps: [CONTRIBUTING.md](CONTRIBUTING.md).
+- What changed in each version: [CHANGELOG.md](CHANGELOG.md).
+- Security design and how to report a problem: [SECURITY.md](SECURITY.md).
+
+## License
+
+[MIT](LICENSE) © 2026 Victor Schote
