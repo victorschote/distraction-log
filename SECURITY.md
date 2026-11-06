@@ -6,9 +6,10 @@ Only the latest release gets fixes.
 
 ## Reporting a problem
 
-Please do **not** open a public issue for security problems. Contact the maintainer privately
-through GitHub ([@victor-schote](https://github.com/victor-schote)) or, if the repository is public,
-use **Security > Report a vulnerability** on the repository page. You can expect an answer within a week.
+Please do **not** open a public issue for security problems. Use
+[**Report a vulnerability**](https://github.com/victorschote/distraction-log/security/advisories/new)
+on the repository's Security tab; only the maintainer can see the report.
+You can expect an answer within a week.
 
 ## How Distraction Log handles risk
 

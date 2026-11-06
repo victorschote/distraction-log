@@ -26,5 +26,5 @@ First public version.
 - **Ask Claude coach**: a 14-day summary opened in Claude Code for a personal coaching report.
 - `setup.ps1` installer and uninstaller, documentation, tests and continuous integration.
 
-[Unreleased]: https://github.com/victor-schote/distraction-log/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/victor-schote/distraction-log/releases/tag/v1.0.0
+[Unreleased]: https://github.com/victorschote/distraction-log/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/victorschote/distraction-log/releases/tag/v1.0.0

@@ -6,4 +6,4 @@ In short: be respectful and constructive, assume good intent, and keep discussio
 Harassment, insults and personal attacks are not accepted.
 
 To report a problem, contact the maintainer privately through GitHub
-([@victor-schote](https://github.com/victor-schote)). Reports are handled confidentially.
+([@victorschote](https://github.com/victorschote)). Reports are handled confidentially.

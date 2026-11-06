@@ -1,7 +1,7 @@
 # Distraction Log
 
-[![CI](https://github.com/victor-schote/distraction-log/actions/workflows/ci.yml/badge.svg)](https://github.com/victor-schote/distraction-log/actions/workflows/ci.yml)
-[![Release](https://img.shields.io/github/v/release/victor-schote/distraction-log)](https://github.com/victor-schote/distraction-log/releases/latest)
+[![CI](https://github.com/victorschote/distraction-log/actions/workflows/ci.yml/badge.svg)](https://github.com/victorschote/distraction-log/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/victorschote/distraction-log)](https://github.com/victorschote/distraction-log/releases/latest)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 ![Windows 10/11](https://img.shields.io/badge/Windows-10%20%7C%2011-0078D6)
 ![PowerShell 5.1](https://img.shields.io/badge/PowerShell-5.1-5391FE)
@@ -63,7 +63,7 @@ and turns it into dashboards, alerts, a focus timer, daily and weekly plans, and
 
 ## Install
 
-1. Download the zip from the [latest release](https://github.com/victor-schote/distraction-log/releases/latest)
+1. Download the zip from the [latest release](https://github.com/victorschote/distraction-log/releases/latest)
    (or `git clone` the repository) and put it in a folder that stays put, for example
    `C:\Users\<you>\FocusLog`.
 2. Open PowerShell in that folder and run:
