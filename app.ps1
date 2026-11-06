@@ -1501,6 +1501,7 @@ function New-SettingsDialog {
       </StackPanel>
     </Grid>
     <TextBlock x:Name="SErr" Foreground="##ink##" FontWeight="SemiBold" Margin="0,10,0,0" TextWrapping="Wrap"/>
+    <TextBlock x:Name="SVersion" Style="{StaticResource Sub}" Margin="0,10,0,-28" HorizontalAlignment="Left"/>
 
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,14,0,0">
       <Button x:Name="SCancel" Style="{StaticResource Btn}" Content="Cancel" MinWidth="90" IsCancel="True"/>
@@ -1526,6 +1527,7 @@ function New-SettingsDialog {
     $dlg.FindName('SFrom').Text = [string]$s.BlockFrom
     $dlg.FindName('STo').Text = [string]$s.BlockTo
     $dlg.FindName('SWeekdays').IsChecked = [bool]$s.BlockWeekdaysOnly
+    $dlg.FindName('SVersion').Text = "Distraction Log $FocusVersion"
     Update-BlockStatus $dlg
 
     $dlg.FindName('SBlockSetup').Add_Click({

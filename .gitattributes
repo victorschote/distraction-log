@@ -1,0 +1,17 @@
+# Normalize line endings; Windows scripts use CRLF in the working copy
+* text=auto
+*.ps1 text eol=crlf
+*.vbs text eol=crlf
+*.md  text eol=crlf
+*.json text eol=crlf
+*.yml text eol=lf
+
+# Binary files
+*.png binary
+*.ico binary
+
+# Not needed in release downloads (git archive)
+.github/       export-ignore
+tests/         export-ignore
+.gitattributes export-ignore
+.editorconfig  export-ignore

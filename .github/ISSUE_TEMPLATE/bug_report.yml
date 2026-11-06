@@ -1,0 +1,50 @@
+name: Bug report
+description: Something doesn't work as expected
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please **don't paste your activity log or window titles**; they can contain private information.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open Distraction Log
+        2. Click ...
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Shown at the bottom of Settings (for example 1.0.0)
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options: [Tracking, Alerts / notifications, Focus timer, Plans, Dashboards, Site blocking, Export, Language, Setup, Other]
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+      placeholder: Windows 11 23H2
+  - type: dropdown
+    id: lang
+    attributes:
+      label: App language
+      options: [English, Portuguese]
+  - type: textarea
+    id: error
+    attributes:
+      label: Error details
+      description: Contents of app-error.txt in the app folder, if it exists.
+      render: text

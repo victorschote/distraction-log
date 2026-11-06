@@ -2,6 +2,7 @@
 # Keep this file ASCII-only: Windows PowerShell 5.1 misreads other characters.
 
 $FocusDir = $PSScriptRoot
+$FocusVersion = '1.0.0'   # keep in sync with CHANGELOG.md
 
 # Distracting apps/sites: keyword (matched against app + window title, any case) = display name.
 # Add or remove lines to match your habits.
@@ -37,7 +38,8 @@ function Get-FocusLabel($app, $title) {
         $t = $title -replace ('\s[' + $Dashes + ']\s(Mozilla Firefox|Google Chrome|Microsoft.*Edge|Opera|Brave)\s*$'), ''
         $low = $t.ToLower()
         foreach ($k in $Distracting.Keys) { if ($low.Contains($k)) { return "$($Browsers[$app]): $($Distracting[$k])" } }
-        $site = (($t -split ('\s[|' + $Dashes + ']\s'))[-1]).Trim()
+        # Hyphen first in the class, so it is a literal "-" and not a range
+        $site = (($t -split ('\s[' + $Dashes + '|]\s'))[-1]).Trim()
         if (-not $site) { $site = 'other' }
         if ($site.Length -gt 40) { $site = $site.Substring(0, 40) + '...' }
         return "$($Browsers[$app]): $site"
